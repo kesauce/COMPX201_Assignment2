@@ -59,6 +59,7 @@ public class ApplianceBST {
 
             // If the appliance is the leaf node, remove it
             if(currentNode.left == null && currentNode.right == null){
+
                 // If it's the root node, remove it
                 if(currentNode == root){
                     root = null;
@@ -76,7 +77,7 @@ public class ApplianceBST {
             }
 
             // If the appliance has only one child, remove it and replace it with the child
-            if (currentNode.left == null ^ currentNode.right == null) {
+            else if (currentNode.left == null ^ currentNode.right == null) {
                 // If it's the root node, remove it
                 if (currentNode == root) {
                     // If the left child is null, set the root to the right child
@@ -122,11 +123,11 @@ public class ApplianceBST {
                 // Replace the value of the current node with the leftmost node's value
                 currentNode.value = leftmostNode.value;
 
-                // If the leftmost node has a right child, replace the current node with the right child
+                // If the leftmost node has a right child, move the right child up
                 if (previousNode.left == leftmostNode) {
                     previousNode.left = leftmostNode.right;
                 } 
-                // If the leftmost node is the immediate right child of the current node we want to remove
+                // If the leftmost node is the immediate right child of the current node we want to 
                 else {
                     previousNode.right = leftmostNode.right;
                 }
@@ -208,7 +209,7 @@ public class ApplianceBST {
      * Gets the minimum value of the tree/subtree.
      * @return The minimum value of the tree/subtree.
      */
-    public Node getMinimum(){
+    public Appliance getMinimum(){
         //Finds the leftmost node of the tree
         Node currentNode = root;
 
@@ -217,14 +218,14 @@ public class ApplianceBST {
             currentNode = currentNode.left;
         }
 
-        return currentNode;
+        return currentNode.value;
     }
 
     /**
      * Gets the maximum value of the tree/subtree.
      * @return The maximum value of the tree/subtree.
      */
-    public Node getMaximum(){
+    public Appliance getMaximum(){
         //Finds the rightmost node of the tree
         Node currentNode = root;
 
@@ -233,7 +234,7 @@ public class ApplianceBST {
             currentNode = currentNode.right;
         }
 
-        return currentNode;
+        return currentNode.value;
     }
 
     /**
