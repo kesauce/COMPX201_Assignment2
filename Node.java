@@ -1,8 +1,8 @@
 public class Node{
 
-    private Appliance value;
-    private Node left;
-    private Node right;
+    public Appliance value;
+    public Node left;
+    public Node right;
 
     public Node(Appliance value){
         this.value = value;
