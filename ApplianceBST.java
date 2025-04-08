@@ -279,7 +279,7 @@ public class ApplianceBST {
         // Call the recursive function
         appliancesInCategorySB.append(printCategorySubtree(currentNode, category));
         
-        appliancesInCategorySB.toString().replace("\n", "");
+        // Prints out the result and formats it by removing extra empty lines
         System.out.println(appliancesInCategorySB.toString().replace("\n\n", "\n"));
     }
 

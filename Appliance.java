@@ -23,7 +23,17 @@ public class Appliance {
     }
 
     public String toString() {
-        return category + " | " + name + " | " + price;
+        // Adds padding to the category and name
+        int categoryPadding = 20 - category.length();
+        int namePadding = 20 - name.length();
+
+        StringBuilder categoryPad = new StringBuilder();
+        categoryPad.append(" ".repeat(categoryPadding));
+
+        StringBuilder namePad = new StringBuilder();
+        namePad.append(" ".repeat(namePadding));
+
+        return category + categoryPad + "|" + name + namePad + "|" + price;
     }
 
     public int compareTo(Appliance other){
