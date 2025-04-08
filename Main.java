@@ -26,9 +26,6 @@ public class Main {
         System.out.println("Appliance found: " + found); // Should print true
         
         // Print the BST in order
-        StrBSTPrinter.printNode(applianceBST.root);
-
-        applianceBST.remove(standFreezer);
 
         StrBSTPrinter.printNode(applianceBST.root);
 
@@ -37,5 +34,7 @@ public class Main {
         // System.out.println(applianceBST.getMinimum());
         
         applianceBST.print();
+
+        applianceBST.printCategory("Oven");
     }
 }

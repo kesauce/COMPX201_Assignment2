@@ -142,8 +142,9 @@ public class ApplianceBST {
     }
 
     /**
-     * Inserts a new appliance into the tree from the root
-     * @param a The new appliance to insert.
+     * Searches for an appliance in the tree.
+     * @return True if the appliance is found, false otherwise.
+     * @param a The appliance to search.
      */	
     public boolean search(Appliance a){
         return searchSubtree(root, a);
@@ -238,7 +239,7 @@ public class ApplianceBST {
     }
 
     /*
-     * Prints the tree by using calling recursively.
+     * Prints the tree by calling recursively.
      */
     public void print(){
         printSubtree(root);
@@ -263,4 +264,49 @@ public class ApplianceBST {
 
     }
 
+    /**
+     * Displays the appliances in category from lowest price to highest price.
+     * @param category The category of the appliances to display.
+     */
+    public void printCategory(String category){
+        // Create a StringBuilder to store the appliances
+        StringBuilder appliancesInCategorySB = new StringBuilder();
+        appliancesInCategorySB.append("The following appliances are in " + category + ":\n");
+
+        // Start comparing from the root node
+        Node currentNode = root;
+
+        // Call the recursive function
+        appliancesInCategorySB.append(printCategorySubtree(currentNode, category));
+        
+        appliancesInCategorySB.toString().replace("\n", "");
+        System.out.println(appliancesInCategorySB.toString().replace("\n\n", "\n"));
+    }
+
+    private String printCategorySubtree(Node currentNode, String category){
+        
+        // Stops when the current node is null
+        if (currentNode == null){
+            return "";
+        }
+
+        // If the current node == category
+        else if (currentNode.value.getCategory().equals(category)){
+            // Process the node and process its children
+            return currentNode.value.toString() + "\n" + printCategorySubtree(currentNode.left, category) + "\n" + printCategorySubtree(currentNode.right, category);
+        }
+
+        // If the current node != category and comes before category
+        else if(currentNode.value.getCategory().compareTo(category) < 0){
+            // Process right subtree
+            return printCategorySubtree(currentNode.right, category);
+        }
+
+        // If the current node != category and comes after category
+        else{
+            // Process left subtree
+            return printCategorySubtree(currentNode.left, category);
+        }
+    }
+    
 }
