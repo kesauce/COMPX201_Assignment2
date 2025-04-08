@@ -32,8 +32,10 @@ public class Main {
 
         StrBSTPrinter.printNode(applianceBST.root);
 
-        System.out.println(applianceBST.getHeight());
-        System.out.println(applianceBST.getMaximum());
-        System.out.println(applianceBST.getMinimum());
+        // System.out.println(applianceBST.getHeight());
+        // System.out.println(applianceBST.getMaximum());
+        // System.out.println(applianceBST.getMinimum());
+        
+        applianceBST.print();
     }
 }

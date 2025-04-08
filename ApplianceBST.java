@@ -13,7 +13,7 @@ public class ApplianceBST {
      * @param a The new appliance to insert.
      * @return The new current root of the tree/subtree.
      */
-    public Node insertSubtree(Node currentRoot, Appliance a){
+    private Node insertSubtree(Node currentRoot, Appliance a){
         // When the tree is null
         if (currentRoot == null){
             currentRoot = new Node(a);
@@ -154,7 +154,7 @@ public class ApplianceBST {
      * @param a The appliance to search for.
      * @return True if the appliance is found, false otherwise.
      */
-    public boolean searchSubtree(Node currentRoot, Appliance a){
+    private boolean searchSubtree(Node currentRoot, Appliance a){
         // Checks if the current root is null
         if (currentRoot == null){
             return false;
@@ -191,11 +191,11 @@ public class ApplianceBST {
      * @param currentNode The current node of the tree/subtree.
      * @return The height of the tree/subtree.
      */
-    public int getHeightSubtree(Node currentNode){
+    private int getHeightSubtree(Node currentNode){
 
-        // If the root is empty, return -1
+        // If the root is empty, return 0
         if (currentNode == null){
-            return -1;
+            return 0;
         }
 
         // Use recursion to count from bottom up
@@ -237,12 +237,30 @@ public class ApplianceBST {
         return currentNode.value;
     }
 
-    /**
-     * Prints the tree using the StrBSTPrinter class.
+    /*
+     * Prints the tree by using calling recursively.
      */
     public void print(){
-        // Print the tree using the StrBSTPrinter class
-        StrBSTPrinter.printNode(root);
+        printSubtree(root);
+    }
+    /**
+     * Prints the tree by using in-order traversal.
+     */
+    private void printSubtree(Node curentNode){
+        // If the root is null then return
+        if (curentNode == null){
+            return;
+        }
+
+        // Process left subtree
+        printSubtree(curentNode.left);
+
+        // Print the root
+        System.out.println(curentNode.value);
+
+        // Process right subtree
+        printSubtree(curentNode.right);
+
     }
 
 }
