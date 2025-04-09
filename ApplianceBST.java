@@ -9,7 +9,15 @@ public class ApplianceBST {
     // 2 - printCategoryAbovePrice
     // 3 - printCategoryBelowPrice
 
-    private int printCategoryFunction = 0;
+    private int printCategoryFunction11 = 0;
+
+    // Make an enum for what printCategory function is active
+    private enum printCategoryFunction{
+        CATEGORYONLY, PRICERANGE, MINPRICE, MAXPRICE
+    }
+
+    // Default to the category only
+    printCategoryFunction activeCategoryFunction = printCategoryFunction.CATEGORYONLY;
 
     public void insert(Appliance a){
         // Insert the appliance into the tree
@@ -277,6 +285,7 @@ public class ApplianceBST {
      * @param category The category of the appliances to display.
      */
     public void printCategory(String category){
+        
         // Create a StringBuilder to store the appliances
         StringBuilder appliancesInCategorySB = new StringBuilder();
         appliancesInCategorySB.append("The following appliances are in " + category + ":\n");
@@ -289,6 +298,7 @@ public class ApplianceBST {
         
         // Prints out the result and formats it by removing extra empty
         System.out.println(appliancesInCategorySB.toString().replace("\n\n", "\n"));
+
     }
 
     /**
@@ -308,7 +318,7 @@ public class ApplianceBST {
         else if (currentNode.value.getCategory().equals(category)){
 
             // If we are doing the printCategoyWithPriceRange function
-            if (printCategoryFunction == 1){
+            if (activeCategoryFunction == printCategoryFunction.PRICERANGE){
                 // If the min <= current node's price <= max
                 if (min <= currentNode.value.getPrice() && currentNode.value.getPrice() <= max){
                     // Process the node and process its children
@@ -326,7 +336,7 @@ public class ApplianceBST {
             }
            
             // If we are doing the printCategoryAbovePrice
-            else if (printCategoryFunction == 2){
+            else if (activeCategoryFunction == printCategoryFunction.MINPRICE){
                 // If the min <= current node's price
                 if (min <= currentNode.value.getPrice()){
                     // Process the node and process its children
@@ -340,7 +350,7 @@ public class ApplianceBST {
             }
             
             // If we are doing the printCategoryBelowPrice
-            else if (printCategoryFunction == 3){
+            else if (activeCategoryFunction == printCategoryFunction.MAXPRICE){
                 // If the current node's price <= max
                 if (currentNode.value.getPrice() <= max){
                     // Process the node and process its children
@@ -374,8 +384,8 @@ public class ApplianceBST {
     }
     
     public void printCategoryWithPriceRange(String category, float min, float max){
-        // State that we are doing printCategoryWithPriceRange
-        printCategoryFunction = 1;
+        // State which print category function is active
+        activeCategoryFunction = printCategoryFunction.PRICERANGE;
 
         // Create a StringBuilder to store the appliances
         StringBuilder appliancesInCategorySB = new StringBuilder();
@@ -390,13 +400,13 @@ public class ApplianceBST {
         // Prints out the result and formats it by removing extra empty
         System.out.println(appliancesInCategorySB.toString().replace("\n\n", "\n"));
 
-        // Reset the printCategoryFunction
-        printCategoryFunction = 0;
+        // Reset to default which category function is active
+        activeCategoryFunction = printCategoryFunction.CATEGORYONLY;
     }
 
     public void printCategoryAbovePrice(String category, float min){
-        // State that we are doing printCategoryAbovePrice
-        printCategoryFunction = 2;
+        // State which print category function is active
+        activeCategoryFunction = printCategoryFunction.MINPRICE;
 
         // Create a StringBuilder to store the appliances
         StringBuilder appliancesInCategorySB = new StringBuilder();
@@ -411,13 +421,13 @@ public class ApplianceBST {
         // Prints out the result and formats it by removing extra empty
         System.out.println(appliancesInCategorySB.toString().replace("\n\n", "\n"));
 
-        // Reset the printCategoryFunction
-        printCategoryFunction = 0;
+        // Reset to default which category function is active
+        activeCategoryFunction = printCategoryFunction.CATEGORYONLY;
     }
 
     public void printCategoryBelowPrice(String category, float max){
-        // State that we are doing printCategoryAbovePrice
-        printCategoryFunction = 3;
+        // State which print category function is active
+        activeCategoryFunction = printCategoryFunction.MAXPRICE;
 
         // Create a StringBuilder to store the appliances
         StringBuilder appliancesInCategorySB = new StringBuilder();
@@ -432,7 +442,7 @@ public class ApplianceBST {
         // Prints out the result and formats it by removing extra empty
         System.out.println(appliancesInCategorySB.toString().replace("\n\n", "\n"));
 
-        // Reset the printCategoryFunction
-        printCategoryFunction = 0;
+        // Reset to default which category function is active
+        activeCategoryFunction = printCategoryFunction.CATEGORYONLY;
     }
 }
