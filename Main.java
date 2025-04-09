@@ -7,7 +7,9 @@ public class Main {
         Appliance standFreezer = new Appliance("Fridge", 1000.20f, "stand freezer");
         Appliance standerFreezest = new Appliance("Fridge", 300.00f, "stander freezest");
         Appliance candle = new Appliance("Oven", 100.20f, "candle"); 
-        Appliance gasStove = new Appliance("Oven", 10200.20f, "Gas stove"); 
+        Appliance gasStove = new Appliance("Oven", 10200f, "Gas stove"); 
+        Appliance gasStove1 = new Appliance("Oven", 500f, "jeff"); 
+        Appliance gasStove2 = new Appliance("Oven", 20000f, "jeff1"); 
         Appliance heatPump = new Appliance("Aircon", 1030.20f, "Heat pump"); 
         
         
@@ -19,6 +21,8 @@ public class Main {
         applianceBST.insert(standerFreezest);
         applianceBST.insert(candle);
         applianceBST.insert(gasStove);
+        applianceBST.insert(gasStove1);
+        applianceBST.insert(gasStove2);
         applianceBST.insert(heatPump);
         
         // Search for an appliance
@@ -36,5 +40,9 @@ public class Main {
         applianceBST.print();
 
         applianceBST.printCategory("Oven");
+        applianceBST.printCategoryWithPriceRange("Oven", 100, 500);
+        applianceBST.printCategoryAbovePrice("Oven", 500);
+        applianceBST.printCategoryBelowPrice("Oven", 500);
+
     }
 }

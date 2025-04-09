@@ -309,8 +309,8 @@ public class ApplianceBST {
 
             // If we are doing the printCategoyWithPriceRange function
             if (printCategoryFunction == 1){
-                // If the min < current node's price < max
-                if (min < currentNode.value.getPrice() && currentNode.value.getPrice() < max){
+                // If the min <= current node's price <= max
+                if (min <= currentNode.value.getPrice() && currentNode.value.getPrice() <= max){
                     // Process the node and process its children
                     return printCategorySubtree(currentNode.left, category, min, max) + "\n" + currentNode.value.toString() + "\n" + printCategorySubtree(currentNode.right, category, min, max);
                 } 
@@ -327,26 +327,30 @@ public class ApplianceBST {
            
             // If we are doing the printCategoryAbovePrice
             else if (printCategoryFunction == 2){
-                // If the min < current node's price < max
-                if (min < currentNode.value.getPrice() && currentNode.value.getPrice() < max){
+                // If the min <= current node's price
+                if (min <= currentNode.value.getPrice()){
                     // Process the node and process its children
                     return printCategorySubtree(currentNode.left, category, min, max) + "\n" + currentNode.value.toString() + "\n" + printCategorySubtree(currentNode.right, category, min, max);
                 } 
                 // If current node's price < min, search right subtree
-                else if (currentNode.value.getPrice() < min){
+                else{
                     return printCategorySubtree(currentNode.right, category, min, max);
                 }
 
-                // If max < current node's price, search right left
+            }
+            
+            // If we are doing the printCategoryBelowPrice
+
+            else if (printCategoryFunction == 3){
+                // If the current node's price <= max
+                if (currentNode.value.getPrice() <= max){
+                    // Process the node and process its children
+                    return printCategorySubtree(currentNode.left, category, min, max) + "\n" + currentNode.value.toString() + "\n" + printCategorySubtree(currentNode.right, category, min, max);
+                } 
+                // If max < current node's price, search left subtree
                 else{
                     return printCategorySubtree(currentNode.left, category, min, max);
                 }
-            }
-            
-            // If we are doing the printCategoryMin
-
-            else if (printCategoryFunction == 3){
-                return "";
             }
             // Does the printCategory function (by deault)
             else{
@@ -403,6 +407,27 @@ public class ApplianceBST {
 
         // Call the recursive function
         appliancesInCategorySB.append(printCategorySubtree(currentNode, category, min, -1));
+        
+        // Prints out the result and formats it by removing extra empty
+        System.out.println(appliancesInCategorySB.toString().replace("\n\n", "\n"));
+
+        // Reset the printCategoryFunction
+        printCategoryFunction = 0;
+    }
+
+    public void printCategoryBelowPrice(String category, float max){
+        // State that we are doing printCategoryAbovePrice
+        printCategoryFunction = 3;
+
+        // Create a StringBuilder to store the appliances
+        StringBuilder appliancesInCategorySB = new StringBuilder();
+        appliancesInCategorySB.append("The following appliances are in " + category + " below $" + max + ":\n");
+
+        // Start comparing from the root node
+        Node currentNode = root;
+
+        // Call the recursive function
+        appliancesInCategorySB.append(printCategorySubtree(currentNode, category, -1, max));
         
         // Prints out the result and formats it by removing extra empty
         System.out.println(appliancesInCategorySB.toString().replace("\n\n", "\n"));
