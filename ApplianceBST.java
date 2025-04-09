@@ -340,7 +340,6 @@ public class ApplianceBST {
             }
             
             // If we are doing the printCategoryBelowPrice
-
             else if (printCategoryFunction == 3){
                 // If the current node's price <= max
                 if (currentNode.value.getPrice() <= max){
@@ -352,6 +351,7 @@ public class ApplianceBST {
                     return printCategorySubtree(currentNode.left, category, min, max);
                 }
             }
+            
             // Does the printCategory function (by deault)
             else{
                 // Process the node and process its children
