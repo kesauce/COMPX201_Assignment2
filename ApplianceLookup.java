@@ -5,21 +5,21 @@ import java.util.Scanner;
 public class ApplianceLookup{
     public static void main(String[] args){
 
-        try{
+        // Checks to see if the program is running 
+        boolean isRunning = true; 
 
+        // Initialise the Appliance Tree
+        ApplianceBST applianceBST = new ApplianceBST();
+
+        // Initialising scanner
+        Scanner scanner;
+        
+        try{
             // Initialising to read the appliance csv
             String filePath = "appliances.csv";
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line = "";
 
-            // Checks to see if the program is running 
-            boolean isRunning = true; 
-
-            // Initialise the Appliance Tree
-            ApplianceBST applianceBST = new ApplianceBST();
-
-            // While the application is running
-            while(isRunning){
 
                 // Read the header then read the next line
                 reader.readLine();
@@ -38,16 +38,23 @@ public class ApplianceLookup{
                     line = reader.readLine();
                 }
 
-                // List out the tree values
-                applianceBST.print();
+                 // Close the reader 
+                 reader.close();
+        }
+        catch (Exception e){
+            System.out.println("There was an error with the file processing.");
+        }
 
+        while(isRunning){
+            try{
+    
                 // Initalise user input
-                int userinputer = 0;
-                Scanner scanner = new Scanner(System.in);
-
+                int userInput= 0;
+                scanner = new Scanner(System.in);
+    
                 // Print out the list of console functions that the user can run
                 System.out.println("--------------------");
-                System.out.println("Main menu: ");
+                System.out.println("Main Menu: ");
                 System.out.println("1. Search for an appliance");
                 System.out.println("2. Add a new appliance");
                 System.out.println("3. Remove an existing appliance");
@@ -56,15 +63,23 @@ public class ApplianceLookup{
                 System.out.println("6. Display all appliances within a category above a minimum price");
                 System.out.println("7. Display all appliances within a category below a minimum price");
                 System.out.println("8. Exit the program");
+    
+                // Loops through user input
                 System.out.print("Enter a number that corresponds to your request: ");
-                int userInput = Integer.parseInt(scanner.nextLine());
-
+                userInput = Integer.parseInt(scanner.nextLine());
+                while(userInput <= 0 || userInput > 8){
+                    System.out.println("Invalid input. Please try again.");
+                    System.out.print("Enter a number that corresponds to your request: ");
+                    userInput = Integer.parseInt(scanner.nextLine());
+                }
+    
+    
                 // Searches for an appliance
                 if (userInput == 1){
-
+    
                     System.out.println("--------------------");
                     System.out.println("Searching an appliance...");
-
+    
                     // Get data from user
                     System.out.print("Enter category: ");
                     String category = scanner.nextLine();
@@ -72,7 +87,7 @@ public class ApplianceLookup{
                     String name = scanner.nextLine();
                     System.out.print("Enter price: ");
                     float price = Float.parseFloat(scanner.nextLine());
-
+    
                     // Make a new appliance and try to find an appliance with the same specs in the bst
                     Appliance newAppliance = new Appliance(category, price, name);
                     boolean applianceFound = applianceBST.search(newAppliance);
@@ -85,24 +100,76 @@ public class ApplianceLookup{
                     else{
                         System.out.println("Appliance was not found in the system. Please make sure that spelling is correct. Input is case-sensitive.");
                     }
+    
+                        // Return or quit
+                        System.out.println("Returning to main menu...");
+                        Thread.sleep(300);
+                    }
+                
+                // Adds a new appliance
+                else if(userInput == 2){
+                    System.out.println("--------------------");
+                    System.out.println("Adding a new appliance...");
 
-                    // Return or quit
+                    // Get data from user
+                    System.out.print("Enter category: ");
+                    String category = scanner.nextLine();
+                    System.out.print("Enter name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Enter price: ");
+                    float price = Float.parseFloat(scanner.nextLine());
+    
+                    // Make a new appliance and insert new appliance into the tree
+                    Appliance newAppliance = new Appliance(category, price, name);
+                    applianceBST.insert(newAppliance);
+
+                    System.out.println("Appliance added successfully.");
                     System.out.println("Returning to main menu...");
                     Thread.sleep(300);
+
                 }
+                
+                // Removes an appliance
+                else if(userInput == 3){
+                    System.out.println("--------------------");
+                    System.out.println("Removing an existing appliance...");
 
-                // Close the scanner
-                //scanner.close();
+                    // Get data from user
+                    System.out.print("Enter category: ");
+                    String category = scanner.nextLine();
+                    System.out.print("Enter name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Enter price: ");
+                    float price = Float.parseFloat(scanner.nextLine());
 
+                    // Make a new appliance and sees if it's in the bst
+                    Appliance newAppliance = new Appliance(category, price, name);
+                    if (applianceBST.search(newAppliance) == true){
+                        
+                        // Remove the appliance from the bst
+                        applianceBST.remove(newAppliance);
+
+                        System.out.println("Appliance removed successfully.");
+                        System.out.println("Returning to main menu...");
+                        Thread.sleep(300);
+                    }
+
+                    // If appliance could not be found
+                    else{
+                        System.out.println("Specified appliance does not exist");
+                        System.out.println("Returning to main menu...");
+                        Thread.sleep(300);
+
+                    }
+                }
             }
-
-            // Close the reader 
-            reader.close();
-            
-        }
-        catch (Exception e){
-            System.out.println("An error occured. " + e.getMessage());
+            catch (Exception e){
+                System.out.println("An error occured. " + e.getMessage());
+                System.out.println("Returning to main menu...");
+                
+            }
         }
 
+        
     }
 }

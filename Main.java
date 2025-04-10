@@ -26,21 +26,23 @@ public class Main {
         // Search for an appliance
         boolean found = applianceBST.search(standFreezer);
         System.out.println("Appliance found: " + found); // Should print true
+        applianceBST.remove(standFreezer);
         
         // Print the BST in order
         StrBSTPrinter.printNode(applianceBST.root);
 
-        //applianceBST.remove(gasStove);
+
+        
 
 
-        applianceBST.getHeight();
+        //applianceBST.getHeight();
 
-        Appliance min = applianceBST.getMinimum();
-        Appliance max = applianceBST.getMaximum();
+        // Appliance min = applianceBST.getMinimum();
+        // Appliance max = applianceBST.getMaximum();
 
-        System.out.println("Minimum appliance: " + min);
-        System.out.println("Maximum appliance: " + max);
-        System.out.println("Height of the tree: " + applianceBST.getHeight());
+        // System.out.println("Minimum appliance: " + min);
+        // System.out.println("Maximum appliance: " + max);
+        // System.out.println("Height of the tree: " + applianceBST.getHeight());
 
         
 

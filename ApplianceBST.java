@@ -54,7 +54,7 @@ public class ApplianceBST {
         // If the appliance is in the tree
         if(search(a)){
             // Find the current root of the appliance we want to remove
-            while(currentNode.value.equals(a) == false){
+            while(currentNode.value.compareTo(a) != 0){
                 if(a.compareTo(currentNode.value) < 0){
                     previousNode = currentNode;
                     currentNode = currentNode.left;
@@ -65,16 +65,20 @@ public class ApplianceBST {
                 }
             }
 
+            System.out.println(a.getName());
+            System.out.println(currentNode.value.getName());
+            System.out.println(a.compareTo(currentNode.value));
+
             // If the appliance is the leaf node, remove it
             if(currentNode.left == null && currentNode.right == null){
 
                 // If it's the root node, remove it
-                if(currentNode == root){
+                if(currentNode.equals(root)){
                     root = null;
                 }
 
                 // If it's the left child, remove it
-                else if(previousNode.left == currentNode){
+                else if(previousNode.left.equals(currentNode)){
                     previousNode.left = null;
                 }
 
@@ -87,7 +91,7 @@ public class ApplianceBST {
             // If the appliance has only one child, remove it and replace it with the child
             else if (currentNode.left == null ^ currentNode.right == null) {
                 // If it's the root node, remove it
-                if (currentNode == root) {
+                if (currentNode.equals(root)) {
                     // If the left child is null, set the root to the right child
                     if (currentNode.left == null) {
                         root = currentNode.right;
@@ -100,7 +104,7 @@ public class ApplianceBST {
 
                 // If there's a left child, replace the parent with the left
                 if (currentNode.left != null) {
-                    if (previousNode.left == currentNode) {
+                    if (previousNode.left.equals(currentNode)) {
                         previousNode.left = currentNode.left;
                     } else {
                         previousNode.right = currentNode.left;
@@ -109,7 +113,7 @@ public class ApplianceBST {
 
                 // If there's a right child, replace the parent with the right
                 else {
-                    if (previousNode.left == currentNode) {
+                    if (previousNode.left.equals(currentNode)) {
                         previousNode.left = currentNode.right;
                     } else {
                         previousNode.right = currentNode.right;
@@ -132,7 +136,7 @@ public class ApplianceBST {
                 currentNode.value = leftmostNode.value;
 
                 // If the leftmost node has a right child, move the right child up
-                if (previousNode.left == leftmostNode) {
+                if (previousNode.left.equals(leftmostNode)) {
                     previousNode.left = leftmostNode.right;
                 } 
                 // If the leftmost node is the immediate right child of the current node we want to 
