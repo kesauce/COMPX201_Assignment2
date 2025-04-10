@@ -64,13 +64,24 @@ public class ApplianceLookup{
                 System.out.println("7. Display all appliances within a category below a minimum price");
                 System.out.println("8. Exit the program");
     
-                // Loops through user input
-                System.out.print("Enter a number that corresponds to your request: ");
-                userInput = Integer.parseInt(scanner.nextLine());
-                while(userInput <= 0 || userInput > 8){
-                    System.out.println("Invalid input. Please try again.");
-                    System.out.print("Enter a number that corresponds to your request: ");
-                    userInput = Integer.parseInt(scanner.nextLine());
+                // Loops through user input to ensure they pick the right numbner
+                while(true){
+                    try{
+                        System.out.print("Enter a number that corresponds to your request: ");
+                        userInput = Integer.parseInt(scanner.nextLine());
+
+                        // If number if valid then break
+                        if (userInput > 0  && userInput <= 8){
+                            break;
+                        }
+                        else{
+                            System.err.println("Invalid number. Choose from 1 to 8.");
+                            continue;
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println("Invalid number. " + e.getMessage());
+                    }
                 }
     
     
@@ -165,18 +176,41 @@ public class ApplianceLookup{
                     // Find the category the user wants to display and the price range
                     System.out.print("Enter category: ");
                     String category = scanner.nextLine();
-                    System.out.print("Enter minimum price: ");
-                    float min = Float.parseFloat(scanner.nextLine());
-                    System.out.print("Enter maximum price: ");
-                    float max = Float.parseFloat(scanner.nextLine());
+
+                    // Ensures users pick a valid minimum
+                    float min;
+                    while(true){
+                        try{
+                            System.out.print("Enter minimum price: ");
+                            min = Float.parseFloat(scanner.nextLine());
+                            break;
+                        }
+                        catch (Exception e){
+                            System.out.println("Invalid price." + e.getMessage());
+                        }
+                    }
+
+                    // Ensures users pick a valid maximum
+                    float max;
+                    while(true){
+                        try{
+                            System.out.print("Enter maximum price: ");
+                            max = Float.parseFloat(scanner.nextLine());
+                            break;
+                        }
+                        catch (Exception e){
+                            System.out.println("Invalid price." + e.getMessage());
+                        }
+                    }
 
                     // Display the price range
                     applianceBST.printCategoryWithPriceRange(category, min, max);
 
                     System.out.println("Returning to main menu...");
                     Thread.sleep(2000);
+                
+            
                 }
-
                 // Display all appliances in a category above a price
                 else if (userInput == 6){
 
@@ -186,8 +220,19 @@ public class ApplianceLookup{
                     // Find the category the user wants to display and the price range
                     System.out.print("Enter category: ");
                     String category = scanner.nextLine();
-                    System.out.print("Enter minimum price: ");
-                    float min = Float.parseFloat(scanner.nextLine());
+
+                    // Ensures users pick a valid minimum
+                    float min;
+                    while(true){
+                        try{
+                            System.out.print("Enter minimum price: ");
+                            min = Float.parseFloat(scanner.nextLine());
+                            break;
+                        }
+                        catch (Exception e){
+                            System.out.println("Invalid price." + e.getMessage());
+                        }
+                    }
 
                     // Display the price range
                     applianceBST.printCategoryAbovePrice(category, min);
@@ -196,6 +241,7 @@ public class ApplianceLookup{
                     Thread.sleep(2000);
                 }
 
+                // Displays all appliances in a category below a price
                 else if (userInput == 7){
 
                     System.out.println("----------");
@@ -204,8 +250,19 @@ public class ApplianceLookup{
                     // Find the category the user wants to display and the price range
                     System.out.print("Enter category: ");
                     String category = scanner.nextLine();
-                    System.out.print("Enter maximum price: ");
-                    float max = Float.parseFloat(scanner.nextLine());
+
+                    // Ensures users pick a valid maximum
+                    float max;
+                    while(true){
+                        try{
+                            System.out.print("Enter maximum price: ");
+                            max = Float.parseFloat(scanner.nextLine());
+                            break;
+                        }
+                        catch (Exception e){
+                            System.out.println("Invalid price." + e.getMessage());
+                        }
+                    }
 
                     // Display the price range
                     applianceBST.printCategoryBelowPrice(category, max);
@@ -214,6 +271,7 @@ public class ApplianceLookup{
                     Thread.sleep(2000);
                 }
 
+                // Exits the program
                 else if (userInput == 8){
                     
                     // Stops the program
@@ -239,8 +297,18 @@ public class ApplianceLookup{
             String category = scanner.nextLine();
             System.out.print("Enter name: ");
             String name = scanner.nextLine();
-            System.out.print("Enter price: ");
-            float price = Float.parseFloat(scanner.nextLine());
+            float price;
+            while(true){
+                try{
+                    System.out.print("Enter price: ");
+                    price = Float.parseFloat(scanner.nextLine());
+                    break;
+                }
+                catch (Exception e){
+                    System.out.println("Invalid price." + e.getMessage());
+                }
+            }
+            
 
             // Make a new appliance and try to find an appliance with the same specs in the bst
             return new Appliance(category, price, name);
