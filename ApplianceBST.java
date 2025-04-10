@@ -65,10 +65,6 @@ public class ApplianceBST {
                 }
             }
 
-            System.out.println(a.getName());
-            System.out.println(currentNode.value.getName());
-            System.out.println(a.compareTo(currentNode.value));
-
             // If the appliance is the leaf node, remove it
             if(currentNode.left == null && currentNode.right == null){
 
@@ -139,7 +135,7 @@ public class ApplianceBST {
                 if (previousNode.left.equals(leftmostNode)) {
                     previousNode.left = leftmostNode.right;
                 } 
-                // If the leftmost node is the immediate right child of the current node we want to 
+                // If the leftmost node is the immediate right child of the current node
                 else {
                     previousNode.right = leftmostNode.right;
                 }

@@ -79,17 +79,9 @@ public class ApplianceLookup{
     
                     System.out.println("--------------------");
                     System.out.println("Searching an appliance...");
-    
-                    // Get data from user
-                    System.out.print("Enter category: ");
-                    String category = scanner.nextLine();
-                    System.out.print("Enter name: ");
-                    String name = scanner.nextLine();
-                    System.out.print("Enter price: ");
-                    float price = Float.parseFloat(scanner.nextLine());
-    
-                    // Make a new appliance and try to find an appliance with the same specs in the bst
-                    Appliance newAppliance = new Appliance(category, price, name);
+                    
+                    // Store the appliance the user wants to work with
+                    Appliance newAppliance = createUserAppliance(scanner);
                     boolean applianceFound = applianceBST.search(newAppliance);
 
                     // Inform user if appliance was found
@@ -103,64 +95,132 @@ public class ApplianceLookup{
     
                         // Return or quit
                         System.out.println("Returning to main menu...");
-                        Thread.sleep(300);
+                        Thread.sleep(2000);
                     }
                 
                 // Adds a new appliance
-                else if(userInput == 2){
+                else if (userInput == 2){
                     System.out.println("--------------------");
                     System.out.println("Adding a new appliance...");
-
-                    // Get data from user
-                    System.out.print("Enter category: ");
-                    String category = scanner.nextLine();
-                    System.out.print("Enter name: ");
-                    String name = scanner.nextLine();
-                    System.out.print("Enter price: ");
-                    float price = Float.parseFloat(scanner.nextLine());
     
                     // Make a new appliance and insert new appliance into the tree
-                    Appliance newAppliance = new Appliance(category, price, name);
+                    Appliance newAppliance = createUserAppliance(scanner);
                     applianceBST.insert(newAppliance);
 
                     System.out.println("Appliance added successfully.");
                     System.out.println("Returning to main menu...");
-                    Thread.sleep(300);
+                    Thread.sleep(2000);
 
                 }
                 
                 // Removes an appliance
-                else if(userInput == 3){
+                else if (userInput == 3){
                     System.out.println("--------------------");
                     System.out.println("Removing an existing appliance...");
 
-                    // Get data from user
-                    System.out.print("Enter category: ");
-                    String category = scanner.nextLine();
-                    System.out.print("Enter name: ");
-                    String name = scanner.nextLine();
-                    System.out.print("Enter price: ");
-                    float price = Float.parseFloat(scanner.nextLine());
-
                     // Make a new appliance and sees if it's in the bst
-                    Appliance newAppliance = new Appliance(category, price, name);
-                    if (applianceBST.search(newAppliance) == true){
+                    Appliance newAppliance = createUserAppliance(scanner);
+                    if (applianceBST.search(newAppliance)){
                         
                         // Remove the appliance from the bst
                         applianceBST.remove(newAppliance);
 
                         System.out.println("Appliance removed successfully.");
                         System.out.println("Returning to main menu...");
-                        Thread.sleep(300);
+                        Thread.sleep(2000);
                     }
 
                     // If appliance could not be found
                     else{
                         System.out.println("Specified appliance does not exist");
                         System.out.println("Returning to main menu...");
-                        Thread.sleep(300);
+                        Thread.sleep(2000);
 
                     }
+                }
+
+                // Displays all appliances in a category 
+                else if (userInput == 4){
+
+                    System.out.println("----------");
+                    System.out.println("Displaying all appliance in the same category...");
+
+                    // Find the category the user wants to display
+                    System.out.print("Enter category: ");
+                    String category = scanner.nextLine();
+
+                    // Display all the appliances in that category
+                    applianceBST.printCategory(category);
+
+                    System.out.println("Returning to main menu...");
+                    Thread.sleep(2000);
+                }
+
+                // Display all appliance in a category within a price range
+                else if (userInput == 5){
+
+                    System.out.println("----------");
+                    System.out.println("Displaying all appliance in the same category within a price range...");
+
+                    // Find the category the user wants to display and the price range
+                    System.out.print("Enter category: ");
+                    String category = scanner.nextLine();
+                    System.out.print("Enter minimum price: ");
+                    float min = Float.parseFloat(scanner.nextLine());
+                    System.out.print("Enter maximum price: ");
+                    float max = Float.parseFloat(scanner.nextLine());
+
+                    // Display the price range
+                    applianceBST.printCategoryWithPriceRange(category, min, max);
+
+                    System.out.println("Returning to main menu...");
+                    Thread.sleep(2000);
+                }
+
+                // Display all appliances in a category above a price
+                else if (userInput == 6){
+
+                    System.out.println("----------");
+                    System.out.println("Displaying all appliance in the same category above a price...");
+
+                    // Find the category the user wants to display and the price range
+                    System.out.print("Enter category: ");
+                    String category = scanner.nextLine();
+                    System.out.print("Enter minimum price: ");
+                    float min = Float.parseFloat(scanner.nextLine());
+
+                    // Display the price range
+                    applianceBST.printCategoryAbovePrice(category, min);
+
+                    System.out.println("Returning to main menu...");
+                    Thread.sleep(2000);
+                }
+
+                else if (userInput == 7){
+
+                    System.out.println("----------");
+                    System.out.println("Displaying all appliance in the same category below a price...");
+
+                    // Find the category the user wants to display and the price range
+                    System.out.print("Enter category: ");
+                    String category = scanner.nextLine();
+                    System.out.print("Enter maximum price: ");
+                    float max = Float.parseFloat(scanner.nextLine());
+
+                    // Display the price range
+                    applianceBST.printCategoryBelowPrice(category, max);
+
+                    System.out.println("Returning to main menu...");
+                    Thread.sleep(2000);
+                }
+
+                else if (userInput == 8){
+                    
+                    // Stops the program
+                    System.out.println("----------");
+                    System.err.println("Program terminated...");
+                    isRunning = false;
+                    System.exit(0);
                 }
             }
             catch (Exception e){
@@ -170,6 +230,23 @@ public class ApplianceLookup{
             }
         }
 
-        
+    }
+
+    private static Appliance createUserAppliance(Scanner scanner){
+        try {
+            // Get data from user
+            System.out.print("Enter category: ");
+            String category = scanner.nextLine();
+            System.out.print("Enter name: ");
+            String name = scanner.nextLine();
+            System.out.print("Enter price: ");
+            float price = Float.parseFloat(scanner.nextLine());
+
+            // Make a new appliance and try to find an appliance with the same specs in the bst
+            return new Appliance(category, price, name);
+        } catch (Exception e) {
+            System.out.println("Invalid input." + e.getMessage());
+            return null;
+        }
     }
 }

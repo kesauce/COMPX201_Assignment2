@@ -6,12 +6,12 @@ public class Main {
         // Create some appliances
         Appliance standFreezer = new Appliance("Fridge", 1000.20f, "stand freezer");
         Appliance standerFreezest = new Appliance("Fridge", 300.00f, "stander freezest");
-        Appliance candle = new Appliance("Oven ", 100.20f, "candle"); 
-        Appliance gasStove = new Appliance("Oven ", 10200.20f, "Gas stove"); 
+        Appliance candle = new Appliance("Oven", 100.20f, "candle"); 
+        Appliance gasStove = new Appliance("Oven", 10200.20f, "Gas stove"); 
         Appliance heatPump = new Appliance("Aircon", 1030.20f, "Heat pump"); 
         Appliance random = new Appliance("Fridge", 1030.20f, "Heat"); 
         
-        
+        Appliance standFreezerDuplicate = new Appliance("Fridge", 1000.20f, "stand freezer");
 
         // Insert appliances into the BST
         applianceBST.insert(standFreezer);
@@ -24,30 +24,36 @@ public class Main {
         applianceBST.insert(random);
         
         // Search for an appliance
-        boolean found = applianceBST.search(standFreezer);
+        boolean found = applianceBST.search(standFreezerDuplicate);
         System.out.println("Appliance found: " + found); // Should print true
-        applianceBST.remove(standFreezer);
         
         // Print the BST in order
         StrBSTPrinter.printNode(applianceBST.root);
 
+        applianceBST.remove(standerFreezest);
+
+        applianceBST.getHeight();
+
+        Appliance min = applianceBST.getMinimum();
+        Appliance max = applianceBST.getMaximum();
+
+        System.out.println("Minimum appliance: " + min);
+        System.out.println("Maximum appliance: " + max);
+        System.out.println("Height of the tree: " + applianceBST.getHeight());
 
         
-
-
-        //applianceBST.getHeight();
-
-        // Appliance min = applianceBST.getMinimum();
-        // Appliance max = applianceBST.getMaximum();
-
-        // System.out.println("Minimum appliance: " + min);
-        // System.out.println("Maximum appliance: " + max);
-        // System.out.println("Height of the tree: " + applianceBST.getHeight());
 
         
 
        
+        //applianceBST.printCategory(candle.getCategory());
+        applianceBST.printCategoryBelowPrice("Oven", 500000);
+        //System.out.println(random.getCategory());
 
-        applianceBST.printCategoryWithPriceRange("Fridge", 200, 10000);
+        System.out.println(applianceBST.search(random));
+        
+        StrBSTPrinter.printNode(applianceBST.root);
+
+        
     }
 }
