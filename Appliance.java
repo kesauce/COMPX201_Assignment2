@@ -24,7 +24,7 @@ public class Appliance {
 
     public String toString() {
         // Adds padding to the category and name
-        int maxPad = 20;
+        int maxPad = 40;
         int categoryPadding = maxPad - category.length();
         int namePadding = maxPad - name.length();
 

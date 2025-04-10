@@ -3,14 +3,6 @@ public class ApplianceBST {
     // Initialise the root of the tree
     public Node root;
 
-    // Initialise an integer that determines which print category function is active, printCategory by default
-    // 0 - printCategory
-    // 1 - printCategoryWithPriceRange
-    // 2 - printCategoryAbovePrice
-    // 3 - printCategoryBelowPrice
-
-    private int printCategoryFunction11 = 0;
-
     // Make an enum for what printCategory function is active
     private enum printCategoryFunction{
         CATEGORYONLY, PRICERANGE, MINPRICE, MAXPRICE
@@ -178,7 +170,7 @@ public class ApplianceBST {
         }
 
         // Checks if the current root is the appliance we are looking for
-        else if (currentRoot.value == a){
+        else if (currentRoot.value.compareTo(a) == 0){
             return true;
         }
 
