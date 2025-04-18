@@ -1,3 +1,6 @@
+/**
+ * A class for the node in the binary search tree.
+ */
 public class Node{
 
     public Appliance value;

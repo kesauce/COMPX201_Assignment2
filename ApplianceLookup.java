@@ -3,6 +3,11 @@ import java.io.FileReader;
 import java.util.Scanner;
 
 public class ApplianceLookup{
+
+    /**
+     * Main method
+     * @param args
+     */
     public static void main(String[] args){
 
         // Checks to see if the program is running 
@@ -61,7 +66,7 @@ public class ApplianceLookup{
                 System.out.println("4. Display all appliances within a category");
                 System.out.println("5. Display all appliances within a category in the same price range");
                 System.out.println("6. Display all appliances within a category above a minimum price");
-                System.out.println("7. Display all appliances within a category below a minimum price");
+                System.out.println("7. Display all appliances within a category below a maximum price");
                 System.out.println("8. Exit the program");
     
                 // Loops through user input to ensure they pick the right numbner
@@ -83,7 +88,6 @@ public class ApplianceLookup{
                         System.out.println("Invalid number. " + e.getMessage());
                     }
                 }
-    
     
                 // Searches for an appliance
                 if (userInput == 1){
@@ -211,6 +215,7 @@ public class ApplianceLookup{
                 
             
                 }
+                
                 // Display all appliances in a category above a price
                 else if (userInput == 6){
 
@@ -281,6 +286,7 @@ public class ApplianceLookup{
                     System.exit(0);
                 }
             }
+            
             catch (Exception e){
                 System.out.println("An error occured. " + e.getMessage());
                 System.out.println("Returning to main menu...");
@@ -290,6 +296,11 @@ public class ApplianceLookup{
 
     }
 
+    /**
+     * Create an appliance object for the user to compare with.
+     * @param scanner The scanner object used in the program.
+     * @return None
+     */
     private static Appliance createUserAppliance(Scanner scanner){
         try {
             // Get data from user

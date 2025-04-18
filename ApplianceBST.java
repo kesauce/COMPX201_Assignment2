@@ -1,3 +1,6 @@
+/**
+ * Class for the binarty search tree of appliances.
+ */
 public class ApplianceBST {
     
     // Initialise the root of the tree
@@ -11,16 +14,17 @@ public class ApplianceBST {
     // Default to the category only
     printCategoryFunction activeCategoryFunction = printCategoryFunction.CATEGORYONLY;
 
-    public void insert(Appliance a){
-        // Insert the appliance into the tree
-        root = insertSubtree(root, a);
-    }
     /**
      * Inserts a new appliance into the tree.
      * @param currentRoot The current root of the tree/subtree.
      * @param a The new appliance to insert.
      * @return The new current root of the tree/subtree.
      */
+    public void insert(Appliance a){
+        // Insert the appliance into the tree
+        root = insertSubtree(root, a);
+    }
+
     private Node insertSubtree(Node currentRoot, Appliance a){
         // When the tree is null
         if (currentRoot == null){
@@ -67,14 +71,14 @@ public class ApplianceBST {
 
             // If the appliance is the leaf node, remove it
             if(currentNode.left == null && currentNode.right == null){
-
+                
                 // If it's the root node, remove it
                 if(currentNode.equals(root)){
                     root = null;
                 }
 
                 // If it's the left child, remove it
-                else if(previousNode.left.equals(currentNode)){
+                else if(previousNode.left != null && previousNode.left.equals(currentNode)){
                     previousNode.left = null;
                 }
 
@@ -86,6 +90,7 @@ public class ApplianceBST {
 
             // If the appliance has only one child, remove it and replace it with the child
             else if (currentNode.left == null ^ currentNode.right == null) {
+                
                 // If it's the root node, remove it
                 if (currentNode.equals(root)) {
                     // If the left child is null, set the root to the right child
@@ -100,7 +105,7 @@ public class ApplianceBST {
 
                 // If there's a left child, replace the parent with the left
                 if (currentNode.left != null) {
-                    if (previousNode.left.equals(currentNode)) {
+                    if (previousNode.left != null && previousNode.left.equals(currentNode)) {
                         previousNode.left = currentNode.left;
                     } else {
                         previousNode.right = currentNode.left;
@@ -109,7 +114,7 @@ public class ApplianceBST {
 
                 // If there's a right child, replace the parent with the right
                 else {
-                    if (previousNode.left.equals(currentNode)) {
+                    if (previousNode.left != null && previousNode.left.equals(currentNode)) {
                         previousNode.left = currentNode.right;
                     } else {
                         previousNode.right = currentNode.right;
@@ -119,6 +124,7 @@ public class ApplianceBST {
 
             // If the appliance has two children, find the leftmost node of the right subtree
             else {
+                
                 // Find the leftmost node of the right subtree
                 previousNode = currentNode;
                 Node leftmostNode = currentNode.right;
@@ -157,12 +163,7 @@ public class ApplianceBST {
     public boolean search(Appliance a){
         return searchSubtree(root, a);
     }
-    /**
-     * Searches for an appliance in the tree.
-     * @param currentRoot The current root of the tree/subtree.
-     * @param a The appliance to search for.
-     * @return True if the appliance is found, false otherwise.
-     */
+
     private boolean searchSubtree(Node currentRoot, Appliance a){
         // Checks if the current root is null
         if (currentRoot == null){
@@ -190,7 +191,7 @@ public class ApplianceBST {
 
     /**
      * Gets the height of the subtree.
-     * @return
+     * @return The height of the tree.
      */
     public int getHeight(){
         return getHeightSubtree(root);
@@ -375,6 +376,12 @@ public class ApplianceBST {
         }
     }
     
+    /**
+     * Goes through the tree recursively and prints the nodes that follow the same category within a price range.
+     * @param category The target category.
+     * @param min The minimum price.
+     * @param max The maximum price.
+     */
     public void printCategoryWithPriceRange(String category, float min, float max){
         // State which print category function is active
         activeCategoryFunction = printCategoryFunction.PRICERANGE;
@@ -396,6 +403,11 @@ public class ApplianceBST {
         activeCategoryFunction = printCategoryFunction.CATEGORYONLY;
     }
 
+    /**
+     * Goes through the tree recursively and prints the nodes that follow the same category above a price.
+     * @param category The target category.
+     * @param min The minimum price.
+     */
     public void printCategoryAbovePrice(String category, float min){
         // State which print category function is active
         activeCategoryFunction = printCategoryFunction.MINPRICE;
@@ -417,6 +429,11 @@ public class ApplianceBST {
         activeCategoryFunction = printCategoryFunction.CATEGORYONLY;
     }
 
+    /**
+     * Goes through the tree recursively and prints the nodes that follow the same category below a price.
+     * @param category The target category.
+     * @param max The maximum price.
+     */
     public void printCategoryBelowPrice(String category, float max){
         // State which print category function is active
         activeCategoryFunction = printCategoryFunction.MAXPRICE;

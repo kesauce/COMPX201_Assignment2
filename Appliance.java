@@ -1,3 +1,6 @@
+/**
+ * Class that represents an appliance, containing a category, price, and name.
+ */
 public class Appliance {
 
     private String category;
@@ -22,6 +25,10 @@ public class Appliance {
         return name;
     }
 
+    /**
+     * Formats the appliance to display the category, price, and name of a certain appliance.
+     * @return Returns a formatted string.
+     */
     public String toString() {
         // Adds padding to the category and name
         int maxPad = 40;
@@ -37,6 +44,11 @@ public class Appliance {
         return category + categoryPad + "|" + name + namePad + "|" + price;
     }
 
+    /**
+     * Compares two appliances by category then price then name.
+     * @param other The other appliance to compare with.
+     * @return -1, 0, or 1, depending on if the appliance comes before, or after the other appliance.
+     */
     public int compareTo(Appliance other){
         // If self has a before category than other
         if (0 > this.category.compareTo(other.category)){
